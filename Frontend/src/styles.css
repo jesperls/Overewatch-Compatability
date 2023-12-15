@@ -1,0 +1,12 @@
+body {
+    background-color: #0a0a0a; /* Dark background */
+    color: #e6e6e6; /* Light text color */
+    font-family: 'Arial', sans-serif;
+    width:100%;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+app-route {
+    width: 60%;
+}

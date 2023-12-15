@@ -1,0 +1,40 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="username" placeholder="Username">
+  <!-- Repeat for DPS, Support, and Tank with Tier and Rank -->
+  <button type="submit">Add User</button>
+</form>
+
+<!-- Your existing code for displaying users -->
+<div id="allboxes">
+  <div *ngFor="let user of users | keyvalue" class="userbox">
+    <div *ngIf="editMode[user.key]; else viewMode">
+      <h2>{{ user.key }}</h2>
+      <div *ngFor="let role of ['DPS', 'Support', 'Tank']" class="roleRow">
+        <strong> {{ role }}: </strong>
+        <select [(ngModel)]="getRoleData(users[user.key], role).Tier">
+          <option *ngFor="let tier of tiers" [value]="tier">{{ tier }}</option>
+        </select>
+        <select [(ngModel)]="getRoleData(users[user.key], role).Rank">
+          <option *ngFor="let rank of ranks" [value]="rank">{{ rank }}</option>
+        </select>
+      </div>
+      <button type="button" (click)="toggleEdit(user.key)">Update</button>
+    </div>
+    <ng-template #viewMode>
+      <h2>{{ user.key }}</h2>
+      <div *ngFor="let role of user.value | keyvalue">
+        <ng-container *ngIf="role.value as roleData">
+          <strong [class.highlighted] = "roleData.highlighted">{{ role.key }}:</strong> {{ roleData.Tier }} {{ roleData.Rank }}
+          <label class="custom-radio-button">
+            <input type="radio" name="selectedRank" (change)="selectUser(getRoleData(users[user.key], role.key).Tier, getRoleData(users[user.key], role.key).Rank)">
+            <span class="radio-custom"></span>
+          </label>
+          <!-- <input type="radio" name="selectedRank" (change)="selectUser(getRoleData(users[user.key], role.key).Tier, getRoleData(users[user.key], role.key).Rank)"> -->
+        </ng-container>
+      </div>
+      <!-- Display user data in read-only format -->
+      <button type="button" (click)="toggleEdit(user.key)">Edit</button>
+      <button type="button" (click)="deleteUser(user.key)">Delete</button>
+    </ng-template>
+  </div>
+</div>

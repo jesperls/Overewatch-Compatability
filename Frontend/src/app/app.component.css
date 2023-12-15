@@ -1,0 +1,146 @@
+/* Overwatch Theme - Dark Mode */
+body {
+    background-color: #0a0a0a; /* Dark background */
+    color: #e6e6e6; /* Light text color */
+    font-family: 'Arial', sans-serif;
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+form input, form button {
+    width: 50%;
+    box-sizing: border-box;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: white;
+}
+
+input[type="text"], select {
+    width: auto;
+    padding: 10px;
+    margin: 10px 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: white;
+}
+
+button {
+    width: 150pt;
+    background-color: #f39c12; /* Overwatch orange */
+    color: white;
+    padding: 14px 20px;
+    margin: 5pt;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e67e22;
+}
+
+h2 {
+    color: #f39c12; /* Overwatch orange */
+    text-align: center;
+}
+
+div.user-container {
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #262626;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.highlighted {
+    color: #1abc9c; /* Highlight color */
+    font-weight: bold;
+}
+
+
+
+.custom-radio-button input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .radio-custom {
+    height: 14px; /* Size of the custom radio button */
+    width: 14px; /* Size of the custom radio button */
+    background-color: #424242; /* Background color */
+    border-radius: 20%; /* Makes it circular */
+    display: inline-block;
+    vertical-align: -1px;
+    cursor: pointer;
+  }
+  
+  /* Style for when the radio button is checked */
+  .custom-radio-button input[type="radio"]:checked + .radio-custom {
+    background-color: #f39c12; /* Change color when checked */
+    /* Add more styles if needed */
+  }
+
+  .radio-custom:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+
+/* make it not line break */
+.roleRow{
+    overflow:visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userbox {
+    /* center items */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#allboxes {
+    /* center items */
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* adjust 200px to your needs */
+    grid-gap: 10px; /* adjust to your needs */
+    justify-content: center; /* horizontally center items */
+    align-content: center; /* vertically center items */
+    width:80%;
+    margin: auto;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    form, div.user-container {
+        width: 90%;
+    }
+}
