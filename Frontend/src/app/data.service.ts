@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user.model'; // Adjust the path as needed
+import { User } from './user.model';
+import { environment } from '../environments/environment';
+
 
 
 @Injectable({
@@ -16,7 +18,8 @@ export class DataService {
 */
   getUsers(): Observable<any> {
     // get users from the api endpoint on port 5000
-    return this.http.get('https://darkrage.pro/api/get_json');
+    console.log('${environment.apiEndpoint}/get_json')
+    return this.http.get(`${environment.apiEndpoint}/get_json`);
   }
 
   uploadJson(json: User): Observable<any> {
@@ -27,6 +30,6 @@ export class DataService {
         json[user][role].highlighted = false;
       }
     }
-    return this.http.post('https://darkrage.pro/api/upload_json', json);
+    return this.http.post(`${environment.apiEndpoint}/upload_json`, json);
   }
 }
