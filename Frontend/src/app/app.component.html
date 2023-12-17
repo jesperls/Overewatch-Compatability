@@ -1,15 +1,20 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <input type="text" formControlName="username" placeholder="Username">
+  <input type="text" formControlName="username" placeholder="Username" id="usernameInput">
   <!-- Repeat for DPS, Support, and Tank with Tier and Rank -->
-  <button type="submit">Add User</button>
+  <button type="submit" id="usernameButton">Add User</button>
 </form>
+
+<div id="localBox">
+  Use local data?<input type="checkbox" [ngModel]="isLocal" (change)="changeLocal()">
+  <button type="button" (click)="updateUsers()" [class.disabled]="isLocal">Update users</button>
+</div>
 
 <!-- Your existing code for displaying users -->
 <div id="allboxes">
   <div *ngFor="let user of users | keyvalue" class="userbox">
     <div *ngIf="editMode[user.key]; else viewMode">
       <h2>{{ user.key }}</h2>
-      <div *ngFor="let role of ['DPS', 'Support', 'Tank']" class="roleRow">
+      <div *ngFor="let role of ['Tank', 'DPS', 'Support']" class="roleRow">
         <strong> {{ role }}: </strong>
         <select [(ngModel)]="getRoleData(users[user.key], role).Tier">
           <option *ngFor="let tier of tiers" [value]="tier">{{ tier }}</option>
@@ -22,18 +27,16 @@
     </div>
     <ng-template #viewMode>
       <h2>{{ user.key }}</h2>
-      <div *ngFor="let role of user.value | keyvalue">
+      <div *ngFor="let role of user.value | keyvalue: keepOriginalOrder">
         <ng-container *ngIf="role.value as roleData">
           <strong [class.highlighted] = "roleData.highlighted">{{ role.key }}:</strong> {{ roleData.Tier }} {{ roleData.Rank }}
           <label class="custom-radio-button">
             <input type="radio" name="selectedRank" (change)="selectUser(getRoleData(users[user.key], role.key).Tier, getRoleData(users[user.key], role.key).Rank)">
             <span class="radio-custom"></span>
           </label>
-          <!-- <input type="radio" name="selectedRank" (change)="selectUser(getRoleData(users[user.key], role.key).Tier, getRoleData(users[user.key], role.key).Rank)"> -->
         </ng-container>
       </div>
-      <!-- Display user data in read-only format -->
-      <button type="button" (click)="toggleEdit(user.key)">Edit</button>
+      <button type="button" (click)="toggleEdit(user.key)" *ngIf="isLocal">Edit</button>
       <button type="button" (click)="deleteUser(user.key)">Delete</button>
     </ng-template>
   </div>

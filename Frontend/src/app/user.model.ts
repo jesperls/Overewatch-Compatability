@@ -6,9 +6,9 @@ export interface Role {
 
 export interface UserRoles {
     [key: string]: Role;
+    Tank: Role;
     DPS: Role;
     Support: Role;
-    Tank: Role;
 }
 
 export interface User {
